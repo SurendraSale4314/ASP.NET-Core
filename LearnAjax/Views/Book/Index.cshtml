@@ -1,0 +1,114 @@
+﻿<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/four.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<p class="container">
+    <h2 class="text-center" style="font-family:'Comic Sans MS'">Library Management</h2>
+
+    <button onclick="Add()" id="create" class="btn btn-dark btn-hover" style="float:right">
+        Create New
+    </button><br /><br /> 
+    <table class="table table-bordered table-hover" id="homePage">
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>BookName</th>
+                <th>AuthorName</th>
+                <th>PublishedYear</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>UpdatedOn</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="tbody" id="tableBody">
+            <!-- Employee records will be populated here -->
+        </tbody>
+    </table>
+</p>
+
+<div class="modal fade bg-black" id="bookModel" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="ActionTitle">Add Book Details</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="BookId" class="control-label" id="bookId">Book ID</label>
+                    <input for="BookId" class="form-control" id="BookId" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="BookName" class="control-label">Book Name</label>
+                    <input for="BookName" class="form-control" id="BookName" onblur="validateBookName()" onkeyup="validateBookName()" />
+                    <span validation-for="BookName" class="validation-error" id="BookNameValidationError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="AuthorName" class="control-label">Author Name</label>
+                    <input for="AuthorName" class="form-control" id="AuthorName" onblur="validateAuthorName()" onkeyup="validateAuthorName()" />
+                    <span validation-for="AuthorName" class="validation-error" id="AuthorNameValidationError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="PublisherYear" class="control-label">Published Year</label>
+                    <input for="PublisherYear" class="form-control" id="PublisherYear" onblur="validatePublisherYear()" onkeyup="validatePublisherYear()" />
+                    <span validation-for="PublisherYear" class="validation-error" id="PublisherYearValidationError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Price" class="control-label">Price</label>
+                    <input for="Price" class="form-control" id="Price" onblur="validatePrice()" onkeyup="validatePrice()" autocomplete="off" />
+                    <span validation-for="Price" class="validation-error" id="PriceValidationError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="BookCategoryId" class="control-label">Category </label>
+                    <select for="BookCategoryId" id="BookCategoryId" class="form-control" onkeyup="validateCategory()" onblur="validateCategory()">
+                        <option>Select</option>
+                        <option value="1">IT</option>
+                        <option value="2">Electronics</option>
+                        <option value="3">Mechanical</option>
+                        <option value="4">Civil</option>
+                        <option value="5">Electricals</option>
+                        <option value="6">Economics</option>
+                    </select>
+                    <span class="validation-error" id="BookCategoryIdValidationError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="UpdatedOn" class="control-label">Updated Date</label>
+                    <input for="UpdatedOn" class="form-control" id="UpdatedOn" onblur="validateDate()" onkeyup="validateDate()" />
+                    <span validation-for="UpdatedOn" class="validation-error" id="UpdatedOnValidationError"></span>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick=" AddBook()">Add</button>
+                <button class="btn btn-warning" id="btnUpdate" onclick="ModifyBook() " style="display:none">Update</button>
+                <button class="btn btn-danger btn-default" data-dismiss="modal" id="close" onclick="clearPopUp()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailsModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text-uppercase text-dark">Book Details</h4>
+            </div>
+            <div class="modal-body align-content-center bg-dark">
+                <table class="table">
+                   <tr><th class="col-7 text-white">Book ID</th> <td class="text-info" id="bookId"> </td></tr>
+                    <tr><th class="col-7 text-white">Book Name</th> <td class="text-info" id="bookName"> </td></tr>
+                    <tr><th class="col-7 text-white">Author Name</th> <td class="text-info" id="authorName"> </td></tr>
+                    <tr><th class="col-7 text-white">Published Year</th> <td class="text-info" id="publisherYear"> </td></tr>
+                    <tr><th class="col-7 text-white">Price</th> <td class="text-info" id="price"> </td></tr>
+                    <tr><th class="col-7 text-white">Book Category</th> <td class="text-info" id="bookCategory"> </td></tr>
+                    <tr><th class="col-7 text-white">Updated Date</th> <td class="text-info" id="updatedOn"> </td></tr>
+
+               </table>
+            </div>
+        </div>
+    </div>
+</div>
+
